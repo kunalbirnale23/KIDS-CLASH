@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>EduTug: Math Tug of War</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+    <div id="subject-menu" class="menu-screen">
+        <h1 class="game-title">KIDS CLASH</h1>
+        <p class="game-subtitle">Turning Play into Progress</p>
+        <p class="game-subtitle">Select Your Subject</p>
+
+        <div class="menu-grid">
+            <button class="mode-btn btn-math" onclick="showMathMenu()">🧮 Mathematics</button>
+            <button class="mode-btn btn-english" onclick="startGameFromMenu('english')">📚 English</button>
+        </div>
+    </div>
+
+    <div id="math-menu" class="menu-screen" style="display: none;">
+        <h1 class="game-title">EduTug</h1>
+        <p class="game-subtitle">Select Math Mode</p>
+
+        <div class="menu-grid">
+            <button class="mode-btn btn-add" onclick="startGameFromMenu('+')">➕ Addition</button>
+            <button class="mode-btn btn-sub" onclick="startGameFromMenu('-')">➖ Subtraction</button>
+            <button class="mode-btn btn-mul" onclick="startGameFromMenu('*')">✖️ Multiplication</button>
+            <button class="mode-btn btn-mix" onclick="startGameFromMenu('mix')">🎲 Mix Operations</button>
+        </div>
+        <br>
+        <button class="back-btn" onclick="goBackToSubjects()">⬅️ Back to Subjects</button>
+    </div>
+    <div id="countdown-overlay">
+        <h1 id="countdown-text">3</h1>
+    </div>
+    <div id="winner-overlay">
+        <h1 id="winner-text">TEAM 1 WINS!</h1>
+
+        <div id="analytics-board">
+            <h2>Teacher Analytics Report</h2>
+            <div class="stats-container">
+                <div class="stat-box blue-stats">
+                    <h3>Team 1 (Blue)</h3>
+                    <p>Correct: <span id="stat-l-correct">0</span></p>
+                    <p>Mistakes: <span id="stat-l-wrong">0</span></p>
+                    <p>Accuracy: <span id="stat-l-acc">0</span></p>
+                </div>
+                <div class="stat-box red-stats">
+                    <h3>Team 2 (Red)</h3>
+                    <p>Correct: <span id="stat-r-correct">0</span></p>
+                    <p>Mistakes: <span id="stat-r-wrong">0</span></p>
+                    <p>Accuracy: <span id="stat-r-acc">0</span></p>
+                </div>
+            </div>
+            <!-- Buttons Container -->
+            <div class="winner-buttons">
+                <button id="play-again-btn" class="winner-btn" onclick="closeAnalyticsAndRestart()">🔄 Play Again</button>
+                <button id="menu-btn" class="winner-btn menu-btn" onclick="showMainMenu()">🏠 Main Menu</button>
+            </div>
+        </div>
+    </div>
+    <div id="game-container">
+
+        <div id="timer-box">60</div>
+
+        <div class="team-panel left-team">
+            <div class="team-header">
+                <h2>Team 1</h2>
+                <div class="score-badge"><span id="score-left">0</span></div>
+            </div>
+            <h1 class="math-question" id="question-left">? + ? =</h1>
+            <div class="options-grid" id="options-left">
+                <button class="option-btn">A</button>
+                <button class="option-btn">B</button>
+                <button class="option-btn">C</button>
+                <button class="option-btn">D</button>
+            </div>
+        </div>
+
+        <div class="center-area">
+            <div class="center-line"></div>
+            <div id="rope-container">
+                <div id="rope"></div>
+
+                <div class="character left-char-1"></div>
+                <div class="character left-char-2"></div>
+
+                <div class="character right-char-1"></div>
+                <div class="character right-char-2"></div>
+
+                <div id="flag"></div>
+            </div>
+        </div>
+
+        <div class="team-panel right-team">
+            <div class="team-header">
+                <div class="score-badge"><span id="score-right">0</span></div>
+                <h2>Team 2</h2>
+            </div>
+            <h1 class="math-question" id="question-right">? + ? =</h1>
+            <div class="options-grid" id="options-right">
+                <button class="option-btn">A</button>
+                <button class="option-btn">B</button>
+                <button class="option-btn">C</button>
+                <button class="option-btn">D</button>
+            </div>
+        </div>
+
+    </div>
+    <audio id="sfx-correct" src="correct.mp3"></audio>
+    <audio id="sfx-wrong" src="wrong.mp3"></audio>
+    <audio id="sfx-win" src="win.mp3"></audio>
+    <script src="script.js"></script>
+</body>
